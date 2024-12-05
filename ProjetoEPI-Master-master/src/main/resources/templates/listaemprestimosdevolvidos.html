@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empréstimos Devolvidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            flex-shrink: 0;
+            background-image: url('/sidebar.jpg'); /* Caminho para sua imagem */
+            background-size: cover;
+            background-position: center;
+
+        }
+        .sidebar .nav-link {
+            display: block;            /* Ocupa toda a largura da sidebar */
+            width: 100%;               /* Garante alinhamento com a sidebar */
+            text-align: left;          /* Alinha o texto à esquerda */
+            color: #fff;               /* Cor do texto padrão */
+            padding: 10px 15px;        /* Espaçamento interno */
+            margin: 0.8px 0;             /* Espaçamento entre os links */
+            border-radius: 4px;        /* Cantos arredondados */
+            transition: all 0.4s ease; /* Animação suave ao passar o mouse */
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: #d9f28d;              /* Cor do texto ao passar o mouse */
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+            border-color: #d9f28d;       /* Cor da borda ao passar o mouse */
+        }
+
+
+        .content {
+            flex-grow: 5;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .iframe-container {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<br><br><br>
+
+<br><br>
+<!-- Sidebar -->
+<div class="sidebar d-flex flex-column p-1">
+    <!-- Logotipo -->
+    <a href="/home" class="navbar-brand mb-4 text-center">
+        <img src="/epilogo.png" alt="Logo Sistema EPI" width="200">
+    </a>
+
+    <!-- Linha separadora abaixo do logotipo -->
+    <hr style="border-color: #ddd;">
+
+    <!-- Links -->
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a href="/home" class="nav-link ">Início</a>
+        </li>
+        <li class="nav-item">
+            <a href="/listausuarios" class="nav-link ">Usuários</a>
+        </li>
+        <li class="nav-item">
+            <a href="/colaboradores" class="nav-link">Colaboradores</a>
+        </li>
+        <li class="nav-item">
+            <a href="/categoria" class="nav-link">Categorias</a>
+        </li>
+        <li class="nav-item">
+            <a href="/equipamento" class="nav-link">Equipamentos</a>
+        </li>
+        <li class="nav-item">
+            <a href="/emprestimos" class="nav-link">Emprestimos</a>
+        </li>
+        <li class="nav-item">
+            <a href="/emprestimos/devolvidos" class="nav-link active">Devoluções</a>
+        </li>
+    </ul>
+
+    <!-- Linha separadora acima do botão logout -->
+    <hr style="border-color: #ddd;">
+
+    <!-- Botão Logout -->
+    <form th:action="@{/logout}" th:method="post" class="mt-auto">
+        <button class="btn btn-outline-light w-75 mx-auto d-block" type="submit" style="font-size: 14px; padding: 10px 15px;">
+            Logout
+        </button>
+    </form>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="container mt-3">
+        <h6 class="m-0 font-weight-bold" style="font-size: 28px;">Empréstimos Devolvidos</h6>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Colaborador</th>
+                    <th>Equipamento</th>
+                    <th>Data de Empréstimo</th>
+                    <th>Data de Devolução</th>
+                    <th>Feedback</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="emprestimo : ${emprestimos}">
+                    <td th:text="${emprestimo.id}"></td>
+                    <td th:text="${emprestimo.colaboradorNome}"></td>
+                    <td th:text="${emprestimo.equipamentoNome}"></td>
+                    <td th:text="${emprestimo.dataEmprestimo}"></td>
+                    <td th:text="${emprestimo.dataDevolucao}"></td>
+                    <td th:text="${emprestimo.feedback}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

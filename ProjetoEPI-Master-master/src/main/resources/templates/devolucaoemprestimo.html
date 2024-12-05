@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Devolução de Empréstimo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Main Content -->
+<div class="container mt-3">
+    <h6 class="m-0 font-weight-bold" style="font-size: 24px;"></h6>
+    <div class="mt-3">
+        <p><strong>Colaborador:</strong> <span th:text="${emprestimo.colaboradorNome}"></span></p>
+        <p><strong>Equipamento:</strong> <span th:text="${emprestimo.equipamentoNome}"></span></p>
+        <p><strong>Data do Empréstimo:</strong> <span th:text="${emprestimo.dataEmprestimo}"></span></p>
+
+        <!-- Formulário de devolução -->
+        <form th:action="@{/emprestimos/devolucao/{id}(id=${emprestimo.id})}" method="post">
+            <div class="form-group mt-3">
+                <label for="dataDevolucao">Data de Devolução</label>
+                <input type="date" id="dataDevolucao" name="dataDevolucao" class="form-control" required readonly>
+            </div>
+            <br>
+            <div class="form-group mt-3">
+                <label for="feedback"><strong>Deixe seu feedback</strong></label>
+                <textarea name="feedback" id="feedback" class="form-control" rows="4" placeholder="Escreva um feedback sobre a devolução" required></textarea>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-secondary">Confirmar Devolução</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Preenche a data da devolucao mpréstimo com a data atual
+    const dataDevolucaoField = document.getElementById('dataDevolucao');
+    const hoje = new Date().toISOString().split('T')[0]; // Obtém a data atual no formato YYYY-MM-DD
+    dataDevolucaoField.value = hoje;
+</script>
+
+<script src="/modal_devolucao.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

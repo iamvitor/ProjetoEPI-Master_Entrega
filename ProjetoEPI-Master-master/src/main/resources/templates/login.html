@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Controle de EPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('fundo.png') no-repeat center center fixed; /* Imagem de fundo */
+            background-size: cover; /* Cobre toda a página */
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: flex-end; /* Move o container para a direita */
+            align-items: center;
+        }
+
+        .container {
+            width: 450px; /* Largura do container de login */
+            background-color: #333333; /* Fundo branco */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-right: 100px; /* Espaço da direita para o container */
+        }
+
+        .form-control {
+            background-color: #f8f9fa; /* Cinza claro */
+            color: #333333;
+            border: 1px solid #d4e8d4; /* Borda verde claro */
+            border-radius: 10px;
+            padding: 10px 10px; /* Reduzi o padding para diminuir os campos */
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            background-color: #e3fae1;
+            border-color: #a0d6a0; /* Verde mais vibrante */
+            box-shadow: 0 0 5px rgba(160, 214, 160, 0.5);
+        }
+
+        .btn-primary {
+            width: 70%; /* Botão ocupa toda a largura do container */
+            padding: 8px; /* Altura ajustada */
+            border-radius: 10px;
+            background-color: #a0d6a0; /* Verde claro */
+            border: none;
+            font-size: 16px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        button.btn-primary {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-primary:hover {
+            background-color: #88c088; /* Verde mais escuro ao passar o mouse */
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #777777;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .alert {
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .alert-danger {
+            background-color: #ffcccc;
+            color: #991f1f;
+        }
+
+        .alert-info {
+            background-color: #e6f9e6;
+            color: #2b542c;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="background-color: rgba(220, 220, 220, 0.65);">
+    <!-- Logo -->
+    <div class="text-center mb-4">
+        <a href="/home" class="navbar-brand">
+            <img src="epilogo.png" alt="Logo Sistema EPI" width="150">
+        </a>
+    </div>
+
+    <!-- Formulário de login -->
+    <h3 class="mb-1" style="color: #88c088; font-size: 18px;">Suas Credenciais</h3>
+    <form th:method="post" th:action="@{/login}" th:object="${loginDto}">
+        <div class="form-group">
+            <input type="email" id="email" name="email" th:field="*{email}" class="form-control" placeholder="E-mail" required />
+        </div>
+        <div class="form-group">
+            <input type="password" id="senha" name="senha" th:field="*{senha}" class="form-control" placeholder="Senha" required />
+        </div>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+    </form>
+
+    <!-- Mensagens de erro/sucesso -->
+    <div th:if="${param.erro}" class="alert alert-danger mt-3" role="alert">
+        Email ou Senha inválidos.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-info mt-3" role="alert">
+        Logout realizado com sucesso!
+    </div>
+
+    <!-- Rodapé -->
+    <br><br>
+    <p class="footer-text mt-3 font-size: 14px;">cPainelEPI 2024 &copy; Developed by Nem3zis Group.</p>
+</div>
+
+<!-- Scripts JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
